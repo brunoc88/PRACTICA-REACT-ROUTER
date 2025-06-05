@@ -1,0 +1,48 @@
+🧩 Objetivo del mini SPA
+Vamos a simular un sitio tipo dashboard de administración, con rutas como:
+
+/ → Página de inicio
+
+/dashboard → Panel general
+
+/dashboard/usuarios → Gestión de usuarios
+
+/dashboard/ajustes → Configuración del sistema
+
+/acerca → Página "About"
+
+/contacto → Página de contacto
+
+* → Página 404
+
+Tendremos:
+
+Un Layout con Navbar y Footer
+
+Rutas anidadas dentro de /dashboard
+
+Outlet para renderizar rutas hijas
+
+NavLink con estilos activos
+
+Una página 404
+
+
+
+📁 Estructura sugerida
+
+src/
+├── App.jsx
+├── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   └── Layout.jsx
+├── pages/
+│   ├── Home.jsx
+│   ├── About.jsx
+│   ├── Contact.jsx
+│   ├── NotFound.jsx
+│   └── Dashboard/
+│       ├── Dashboard.jsx
+│       ├── Usuarios.jsx
+│       └── Ajustes.jsx
