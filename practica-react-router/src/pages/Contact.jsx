@@ -4,9 +4,9 @@ const Contact = () => {
     const navigate = useNavigate()
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault()// evita que recargue la página
         const confirm = window.confirm('¿Desea mandar este formulario?')
-        if(confirm) navigate('/')
+        if(confirm) navigate('/')// redirecciona al inicio
         
     }
 

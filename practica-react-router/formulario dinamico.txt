@@ -1,0 +1,43 @@
+import React, { useState } from 'react';
+import './MiFormulario.css'; // acá ponés los estilos que te dejo más abajo
+
+const MiFormulario = () => {
+  const [nombre, setNombre] = useState('');
+  const [error, setError] = useState('');
+  const [valido, setValido] = useState(null); // null = sin validar, true o false según el resultado
+
+  const handleChange = (e) => {
+    const valor = e.target.value;
+    setNombre(valor);
+
+    if (valor.length === 0) {
+      setError('El nombre es obligatorio');
+      setValido(false);
+    } else if (valor.length < 3) {
+      setError('Debe tener al menos 3 letras');
+      setValido(false);
+    } else {
+      setError('');
+      setValido(true);
+    }
+  };
+
+  return (
+    <div className="campo">
+      <label htmlFor="nombre">Nombre:</label>
+      <div className={`input-contenedor ${valido === false ? 'error' : valido === true ? 'ok' : ''}`}>
+        <input
+          type="text"
+          id="nombre"
+          value={nombre}
+          onChange={handleChange}
+        />
+        {valido === true && <span className="icono">✅</span>}
+        {valido === false && <span className="icono">❌</span>}
+      </div>
+      {error && <div className="mensaje-error">{error}</div>}
+    </div>
+  );
+};
+
+export default MiFormulario;
