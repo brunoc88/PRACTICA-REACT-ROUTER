@@ -1,0 +1,51 @@
+¿Qué es useSearchParams?
+Es un hook de React Router (react-router-dom) que te permite:
+
+Leer parámetros de búsqueda (search params) en la URL.
+
+Actualizar esos parámetros sin recargar la página.
+
+Por ejemplo:
+Si estás en /usuarios?orden=desc, podés leer ese orden=desc.
+
+✅ Ejemplo simple
+Supongamos una página de Usuarios con orden ascendente o descendente:
+
+/pages/Usuarios.jsx
+
+import { useSearchParams } from "react-router-dom";
+
+const Usuarios = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const orden = searchParams.get("orden") || "asc";
+
+  const handleOrdenToggle = () => {
+    const nuevoOrden = orden === "asc" ? "desc" : "asc";
+    setSearchParams({ orden: nuevoOrden });
+  };
+
+  return (
+    <div>
+      <h2>Lista de usuarios (orden: {orden})</h2>
+      <button onClick={handleOrdenToggle}>
+        Cambiar a {orden === "asc" ? "descendente" : "ascendente"}
+      </button>
+    </div>
+  );
+};
+
+export default Usuarios;
+
+✅ ¿Qué hace este ejemplo?
+Lee el valor de orden desde la URL (?orden=asc o ?orden=desc).
+
+Usa un botón para cambiar ese valor (actualiza la URL sin recargar).
+
+Si no hay orden, asume asc por defecto.
+
+🧠 Tips extra
+Podés pasar múltiples parámetros: setSearchParams({ orden: 'asc', filtro: 'activo' })
+
+También podés usar searchParams.has('orden'), searchParams.delete(), etc.
+

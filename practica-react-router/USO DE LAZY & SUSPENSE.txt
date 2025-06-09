@@ -1,0 +1,37 @@
+ React.lazy + Suspense: Importación dinámica de componentes
+Permite cargar componentes sólo cuando se van a renderizar, ideal para rutas, dashboards grandes, etc.\
+
+En vez de esto:
+import Contact from './pages/Contact';
+
+Hacés esto:
+import { lazy, Suspense } from 'react';
+
+// Importación dinámica
+const Contact = lazy(() => import('./pages/Contact'));
+
+Y cuando lo usás en una ruta o componente:
+<Suspense fallback={<p>Cargando...</p>}>
+  <Contact />
+</Suspense>
+
+Con React Router (usado en rutas)
+También podés usarlo así:
+const Contact = lazy(() => import('./pages/Contact'));
+
+<Route
+  path="/contacto"
+  element={
+    <Suspense fallback={<p>Cargando contacto...</p>}>
+      <Contact />
+    </Suspense>
+  }
+/>
+
+
+✅ ¿Cuándo conviene usarlo?
+En páginas que no se visitan al inicio (ej. dashboard, contacto, páginas de detalle).
+
+En apps grandes, para reducir el tamaño del bundle inicial.
+
+Ideal para apps SPA donde todo se carga en un solo HTML.

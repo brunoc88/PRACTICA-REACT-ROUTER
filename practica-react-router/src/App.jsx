@@ -1,7 +1,12 @@
+import { lazy, Suspense } from 'react';
+
+// Importación dinámica
+const Contact = lazy(() => import('./pages/Contact'));
+
 import { useState } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import About from './pages/About'
-import Contact from './pages/Contact'
+
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import LayOut from "./components/Layout"
@@ -22,16 +27,23 @@ const App = () => {
         <Route element={<LayOut isAuth={isAuth} onLogout={handleLogout} />}>
           <Route path='/' element={<Home />} />
           <Route path='/acerca' element={<About />} />
-          <Route path='/contacto' element={<Contact />} />
+          <Route
+            path="/contacto"
+            element={
+              <Suspense fallback={<p>Cargando contacto...</p>}>
+                <Contact />
+              </Suspense>
+            }
+          />
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
-           {/* Rutas protegidas */}
+          {/* Rutas protegidas */}
           <Route path='/dashboard' element={isAuth ? <DashBoard /> : <Navigate to="/login" />}>
             <Route path="usuarios" element={<Usuarios />} />
             <Route path="usuarios/:id" element={<UsuarioDetalle />} />
             <Route path="ajustes" element={<Ajustes />} />
           </Route>
         </Route>
-         {/* Ruta 404 fuera del layout */}
+        {/* Ruta 404 fuera del layout */}
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
