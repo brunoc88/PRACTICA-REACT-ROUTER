@@ -1,0 +1,34 @@
+Qué vale la pena testear aquí:
+App.jsx
+
+Que las rutas rendericen el componente correcto.
+
+Que la redirección a /login funcione cuando isAuth es falso y se intenta acceder a /dashboard.
+
+Que el layout esté siempre presente en las rutas protegidas y públicas (menos 404).
+
+Login.jsx
+
+Que el formulario maneje el cambio de inputs.
+
+Que al hacer submit con credenciales válidas se llama onLogin y navega a /dashboard.
+
+Que con credenciales inválidas muestre alerta.
+
+Contacto.jsx (lazy + Suspense)
+
+Que muestre fallback mientras carga.
+
+Que al enviar el formulario con confirmación, navegue a /.
+
+Dashboard y subrutas (Usuarios, UsuarioDetalle, Ajustes)
+
+Que los links en Usuarios muestren correctamente los usuarios y naveguen.
+
+Que el parámetro id en UsuarioDetalle se muestre bien.
+
+Navbar
+
+Que muestre u oculte links según isAuth.
+
+Que el botón logout llame onLogout.
