@@ -1,0 +1,25 @@
+👁️‍🗨️ ¿Qué es screen en Testing Library?
+screen es una interfaz global que te permite acceder al DOM renderizado sin tener que guardar el resultado de render.
+
+Por ejemplo:
+
+render(<Home />)
+// en lugar de hacer const { getByText } = render(...)
+expect(screen.getByText(/home/i)).toBeInTheDocument()
+
+render(<Home />)
+// en lugar de hacer const { getByText } = render(...)
+expect(screen.getByText(/home/i)).toBeInTheDocument()
+
+Es útil porque:
+
+Es más limpio y directo.
+
+Representa lo que el usuario final ve ("pantalla").
+
+¿Cómo ver el HTML en consola durante los tests?
+Podés usar screen.debug() después de renderizar un componente:
+
+También podés hacer:
+
+console.log(screen.getByText(/home/i).outerHTML)

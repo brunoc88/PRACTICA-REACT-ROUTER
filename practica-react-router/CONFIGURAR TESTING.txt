@@ -1,0 +1,76 @@
+🧰 1. Instalar dependencias
+En la raíz del proyecto, corré esto:
+
+npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+
+⚙️ 2. Configurar vitest en vite.config.js
+Asegurate de tener algo así:
+
+// vite.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/setupTests.js'
+  }
+})
+
+
+🧪 3. Crear setupTests.js
+Este archivo es para extensiones como jest-dom:
+// src/setupTests.js
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+afterEach(() => {
+  cleanup()
+})
+
+//Otra forma mas corta: 
+
+/*
+import { afterEach } from 'vitest'
+import { cleanup } from '@testing-library/react'
+import '@testing-library/jest-dom'
+
+afterEach(cleanup)
+
+*/
+
+
+🗂️ 4. Crear carpeta __tests__ o *.test.jsx
+Ejemplo de estructura:
+
+src/
+├─ components/
+│  ├─ Navbar.jsx
+│  ├─ __tests__/
+│     └─ Navbar.test.jsx
+
+
+✅ 5. Probar con un test básico
+Creamos uno para Home.jsx (que solo tiene un <h1>Home</h1>):
+
+▶️ 6. Correr tests
+npx vitest
+O en modo interactivo/watch:
+npx vitest --watch
+
+OTRA OPCION
+
+Agregá en tu package.json:
+"scripts": {
+  "test": "vitest",
+  "test:watch": "vitest --watch"
+}
+
+Entonces podés correr:
+npm test
+# o en modo watch
+npm run test:watch
+

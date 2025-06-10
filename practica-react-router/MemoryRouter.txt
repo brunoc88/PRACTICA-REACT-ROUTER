@@ -1,0 +1,12 @@
+Qué es MemoryRouter
+MemoryRouter es un componente de React Router que:
+
+Provee un router "en memoria" para las pruebas (sin manipular el navegador real).
+
+Te permite simular navegación y rutas dentro de los tests.
+
+No toca la barra de direcciones del navegador ni recarga la página.
+
+Ideal para testear componentes que usan hooks como useNavigate, useParams, etc.
+
+En tu app usás useNavigate para redireccionar después del login, entonces en los tests necesitas envolver el componente dentro de MemoryRouter para que useNavigate funcione sin error.

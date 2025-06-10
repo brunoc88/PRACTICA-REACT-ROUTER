@@ -1,3 +1,11 @@
+Perfecto, con ese archivo ESLint en formato JS (importando plugins y globals) lo que hay que hacer es:
+
+1. Instalar el plugin de Vitest para ESLint:
+
+npm install -D eslint-plugin-vitest
+
+2. Modificar la configuración para que reconozca los globals de Vitest agregando el plugin y el entorno para vitest:
+
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -40,3 +48,5 @@ export default [
     },
   },
 ]
+
+Así ESLint reconocerá test, expect, describe, etc., sin que te los subraye.

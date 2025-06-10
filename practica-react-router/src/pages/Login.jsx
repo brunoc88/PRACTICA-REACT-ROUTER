@@ -21,11 +21,13 @@ const Login = ({ onLogin }) => {
     <div>
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
-        <label>Email: </label>
+        <label>Email: 
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
         <br />
-        <label>Clave: </label>
+        <label>Clave:
         <input type="password" value={clave} onChange={(e) => setClave(e.target.value)} />
+        </label>
         <br />
         <button type="submit">Login</button>
       </form>
