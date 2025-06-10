@@ -1,0 +1,30 @@
+🔎 ¿Qué hace getByRole?
+getByRole busca un elemento por su rol accesible (ARIA).
+
+Algunos ejemplos:
+
+Rol	Qué selecciona	Ejemplo de uso
+button	Botones	getByRole('button') o getByRole('button', { name: /enviar/i })
+textbox	Campos de texto (inputs normales)	getByRole('textbox')
+heading	Encabezados (<h1>, <h2>, etc.)	getByRole('heading', { name: /contacto/i })
+
+Usamos { name: /enviar/i } para buscar el texto visible del botón. La /i es para que sea case-insensitive (ignora mayúsculas/minúsculas).
+
+⚙️ ¿Qué hace fireEvent?
+fireEvent simula acciones del usuario.
+
+Cambiar un input:
+
+js
+Copiar
+Editar
+fireEvent.change(input, { target: { value: 'texto nuevo' } })
+Hacer clic en un botón:
+
+js
+Copiar
+Editar
+fireEvent.click(button)
+Sirve para disparar manualmente eventos DOM (igual que un usuario real haría en el navegador).
+
+🔁 Luego podés hacer un expect(...) para ver si algo cambió.

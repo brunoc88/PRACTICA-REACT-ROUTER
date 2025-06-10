@@ -17,9 +17,5 @@ Si mockeas useNavigate, en realidad reemplazas esa función por una función fal
 
 Así podés decir:
 
-js
-Copiar
-Editar
-
 expect(mockedUsedNavigate).toHaveBeenCalledWith('/dashboard')
  saber que tu código intentó navegar, sin que el test realmente cambie de página.
