@@ -1,40 +1,79 @@
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom' // Para que useNavigate funcione
+import { MemoryRouter } from 'react-router-dom'
 import Login from '../../pages/Login'
 
+const mockedUsedNavigate = vi.fn()
+
+vi.mock('react-router-dom', async () => {
+  const actual = await vi.importActual('react-router-dom')
+  return {
+    ...actual,
+    useNavigate: () => mockedUsedNavigate,
+  }
+})
+
 describe('Login', () => {
-    test('actualiza el valor del input email', () => {
-        render(
-            <MemoryRouter>
-                <Login onLogin={() => { }} />
-            </MemoryRouter>
-        )
+  beforeEach(() => {
+    mockedUsedNavigate.mockReset()
+    window.alert = vi.fn() // mockear alert global antes de cada test
+  })
 
-        // Obtenemos el input por la etiqueta Email
-        const emailInput = screen.getByLabelText(/Email:/i)
+  test('los inputs actualizan su valor correctamente', () => {
+    render(
+      <MemoryRouter>
+        <Login onLogin={() => {}} />
+      </MemoryRouter>
+    )
 
-        // Simulamos escribir en el input
-        fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } })
+    const emailInput = screen.getByLabelText(/email/i)
+    const claveInput = screen.getByLabelText(/clave/i)
 
-        // Verificamos que el valor cambió
-        expect(emailInput.value).toBe('admin@admin.com')
-    })
+    fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } })
+    fireEvent.change(claveInput, { target: { value: '123' } })
 
-    test('los inputs actualizan su valor cuando el usuario escribe', () => {
-        render(
-            <MemoryRouter>
-                <Login onLogin={() => { }} />
-            </MemoryRouter>
-        )
+    expect(emailInput.value).toBe('admin@admin.com')
+    expect(claveInput.value).toBe('123')
+  })
 
-        const emailInput = screen.getByLabelText(/email/i)
-        const claveInput = screen.getByLabelText(/clave/i)
+  test('submit con credenciales válidas llama a onLogin y navega a /dashboard', () => {
+    const onLoginMock = vi.fn()
 
-        fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } })
-        fireEvent.change(claveInput, { target: { value: '123' } })
+    render(
+      <MemoryRouter>
+        <Login onLogin={onLoginMock} />
+      </MemoryRouter>
+    )
 
-        expect(emailInput.value).toBe('admin@admin.com')
-        expect(claveInput.value).toBe('123')
-    })
+    const emailInput = screen.getByLabelText(/email/i)
+    const claveInput = screen.getByLabelText(/clave/i)
+    const submitBtn = screen.getByRole('button', { name: /login/i })
 
+    fireEvent.change(emailInput, { target: { value: 'admin@admin.com' } })
+    fireEvent.change(claveInput, { target: { value: '123' } })
+    fireEvent.click(submitBtn)
+
+    expect(onLoginMock).toHaveBeenCalled()
+    expect(mockedUsedNavigate).toHaveBeenCalledWith('/dashboard')
+  })
+
+  test('submit con credenciales inválidas muestra alerta', () => {
+    const onLoginMock = vi.fn()
+
+    render(
+      <MemoryRouter>
+        <Login onLogin={onLoginMock} />
+      </MemoryRouter>
+    )
+
+    const emailInput = screen.getByLabelText(/email/i)
+    const claveInput = screen.getByLabelText(/clave/i)
+    const submitBtn = screen.getByRole('button', { name: /login/i })
+
+    fireEvent.change(emailInput, { target: { value: 'error@error.com' } })
+    fireEvent.change(claveInput, { target: { value: 'wrong' } })
+    fireEvent.click(submitBtn)
+
+    expect(onLoginMock).not.toHaveBeenCalled()
+    expect(window.alert).toHaveBeenCalledWith('Credenciales inválidas')
+  })
 })

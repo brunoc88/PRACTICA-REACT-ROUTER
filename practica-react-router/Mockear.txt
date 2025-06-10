@@ -1,0 +1,25 @@
+¿Qué es mockear?
+Mockear es crear una versión falsa o simulada de algo para usar en tus tests.
+
+¿Para qué sirve?
+Para controlar cómo funciona algo externo o complejo (como navegación, llamadas a APIs, funciones globales, etc).
+
+Para poder verificar si se llamó esa función y con qué argumentos.
+
+Para evitar efectos secundarios reales (como navegar de verdad, hacer alertas que bloqueen el test, llamar a una API real).
+
+Ejemplo rápido
+En tu Login.jsx, usás useNavigate() para ir a otra página cuando el login es correcto.
+
+Si en el test no mockeas useNavigate, React Router te puede tirar error porque no hay un router real navegando.
+
+Si mockeas useNavigate, en realidad reemplazas esa función por una función falsa que simplemente guarda si la llamaste y con qué parámetros, pero no hace nada real.
+
+Así podés decir:
+
+js
+Copiar
+Editar
+
+expect(mockedUsedNavigate).toHaveBeenCalledWith('/dashboard')
+ saber que tu código intentó navegar, sin que el test realmente cambie de página.

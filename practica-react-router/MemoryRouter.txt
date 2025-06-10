@@ -10,3 +10,13 @@ No toca la barra de direcciones del navegador ni recarga la página.
 Ideal para testear componentes que usan hooks como useNavigate, useParams, etc.
 
 En tu app usás useNavigate para redireccionar después del login, entonces en los tests necesitas envolver el componente dentro de MemoryRouter para que useNavigate funcione sin error.
+
+¿Por qué usar MemoryRouter para envolver el <Login /> en los tests?
+MemoryRouter es un router especial que mantiene el historial de navegación en memoria (no usa el navegador real).
+
+Es necesario en tests para que funcionen hooks como useNavigate o componentes Link, porque dependen de que haya un Router "encima".
+
+Sin un Router (como BrowserRouter o MemoryRouter) el componente que usa useNavigate o Link no funciona y los tests fallan.
+
+En resumen:
+Si el componente usa rutas o navegación, hay que envolverlo en un Router para el test.

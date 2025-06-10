@@ -7,10 +7,6 @@ render(<Home />)
 // en lugar de hacer const { getByText } = render(...)
 expect(screen.getByText(/home/i)).toBeInTheDocument()
 
-render(<Home />)
-// en lugar de hacer const { getByText } = render(...)
-expect(screen.getByText(/home/i)).toBeInTheDocument()
-
 Es útil porque:
 
 Es más limpio y directo.
@@ -23,3 +19,20 @@ Podés usar screen.debug() después de renderizar un componente:
 También podés hacer:
 
 console.log(screen.getByText(/home/i).outerHTML)
+
+¿Qué significa la i en /home/i dentro de getByLabelText(/home/i)?
+Es una expresión regular para buscar textos:
+
+/home/i → busca la palabra "home", ignorando mayúsculas o minúsculas (i = insensitive).
+
+Así, va a encontrar "Home", "home", "HOME", etc.
+
+Si usás /home/ sin la i, sería sensible a mayúsculas/minúsculas (solo encontraría exactamente "home").
+
+3. ¿Y si le pongo la etiqueta como "Home:"?
+El texto exacto en el label importa para que getByLabelText funcione.
+
+Si usás getByLabelText(/home/i) y tu label dice "Home:", va a encontrarlo porque la expresión regular /home/i busca "home" en cualquier parte del texto (y ":" no interfiere).
+
+Podés cambiar el label a "Home:", "Home", "home", y con la regex /home/i lo encontrará igual.
+
