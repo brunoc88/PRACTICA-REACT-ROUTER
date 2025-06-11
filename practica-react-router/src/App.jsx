@@ -38,8 +38,7 @@ const App = () => {
           <Route path="/login" element={<Login onLogin={handleLogin} />} />
           {/* Rutas protegidas */}
           <Route path='/dashboard' element={isAuth ? <DashBoard /> : <Navigate to="/login" />}>
-            <Route path="usuarios" element={<Usuarios />} />
-            <Route path="usuarios/:id" element={<UsuarioDetalle />} />
+            <Route path="usuarios" element={<Usuarios />} />{/*Ruta dinamica */}
             <Route path="ajustes" element={<Ajustes />} />
           </Route>
         </Route>

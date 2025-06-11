@@ -51,7 +51,7 @@ describe('Contact', () => {
     fireEvent.click(button)
 
     // Confirm se llamó
-    expect(window.confirm).toHaveBeenCalledWith('Confirmar envío?')
+    expect(window.confirm).toHaveBeenCalledWith('¿Desea mandar este formulario?')
 
     // Navegación a "/" después de confirmación OK
     await waitFor(() => {
