@@ -1,4 +1,6 @@
-1. Crear proyecto con Vite + React
+
+
+# 1. Crear proyecto con Vite + React
 
 npm create vite@latest
 
@@ -14,8 +16,9 @@ Framework: React
 
 Variant: JavaScript o TypeScript
 
+---
 
-2. Instalar React Router
+# 2. Instalar React Router
 
 Ya dentro del proyecto:
 
