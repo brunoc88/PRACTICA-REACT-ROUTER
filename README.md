@@ -26,10 +26,3 @@ Ya dentro del proyecto:
 
 npm install react-router-dom
 
-Resumen rápido
-
-npm create vite@latest   # crear proyecto
-cd mi-app
-npm install              # instalar dependencias
-npm run dev              # arrancar Vite
-npm install react-router-dom  # instalar router
