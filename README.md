@@ -9,6 +9,7 @@ Luego:
 cd nombre-del-proyecto
 
 npm install
+
 npm run dev
 
 Durante la creación, eliges:
