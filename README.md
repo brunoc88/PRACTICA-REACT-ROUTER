@@ -7,6 +7,7 @@ npm create vite@latest
 Luego:
 
 cd nombre-del-proyecto
+
 npm install
 npm run dev
 
